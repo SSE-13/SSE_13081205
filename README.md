@@ -13,3 +13,43 @@
 ![icon](http://ww3.sinaimg.cn/large/71f39cf5gw1ev9a87vekej21kw11xwpz.jpg)
 
 ## 代码片段：
+      class arrStack {
+        int mSize;
+        int top;
+        char[] st;
+	    arrStack(int size){
+		    mSize = size;
+		    top = -1;
+            char[] st = new char[80];
+	    }
+
+	    arrStack(){
+		    top = -1;
+	    }
+
+	    void clear(){
+	    	top = -1;
+	    }
+
+	    bool push(char  item){
+		    if(top==mSize-1){
+          Console.WriteLine("栈满溢出");
+			    return false;
+	      }
+	      else{
+		      st[++top]=item;
+		      return true;
+		    }
+	    }
+	    
+	    bool pop(int item){
+	      if(top==-1){
+	        Console.WriteLine("栈为空。不能执行出栈操作");
+	        return false;
+	      }
+	      else{
+	        item=st[top--];
+	        return true;
+	        }
+	     }
+	 };
