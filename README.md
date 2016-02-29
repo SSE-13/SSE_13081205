@@ -9,6 +9,7 @@
 * 没事喜欢打游戏，**怪物猎人X**绝赞狩猎中！
 * 不过比起游戏更喜欢音乐
 * 重度拖延症，感谢身边的同学朋友的鞭策才让我存活至今
+* [顺便恭喜小李子终于拿到奥斯卡](http://ent.sina.com.cn/f/m/the88thoscar/)
 * 不过比起这些，我家猫才是最重要的
 ![icon](http://ww3.sinaimg.cn/large/71f39cf5gw1ev9a87vekej21kw11xwpz.jpg)
 
@@ -24,7 +25,7 @@
 	    }
 
 	    arrStack(){
-		    top = -1;
+	    	top = -1;
 	    }
 
 	    void clear(){
@@ -32,15 +33,15 @@
 	    }
 
 	    bool push(char  item){
-		    if(top==mSize-1){
-          Console.WriteLine("栈满溢出");
-			    return false;
-	      }
-	      else{
+	    	if(top==mSize-1){
+	    		Console.WriteLine("栈满溢出");
+		    	return false;
+		    }
+		    else{
 		      st[++top]=item;
 		      return true;
 		    }
-	    }
+		}
 	    
 	    bool pop(int item){
 	      if(top==-1){
