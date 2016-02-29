@@ -10,7 +10,7 @@
 * 不过比起游戏更喜欢音乐
 * 重度拖延症，感谢身边的同学朋友的鞭策才让我存活至今
 * 不过比起这些，猫才是最重要的
-![icon]（http://ww3.sinaimg.cn/large/71f39cf5gw1ev9a87vekej21kw11xwpz.jpg)
+![img]（http://ww3.sinaimg.cn/large/71f39cf5gw1ev9a87vekej21kw11xwpz.jpg)
 
 
 ## 代码片段：
