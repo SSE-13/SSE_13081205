@@ -62,7 +62,7 @@ var TextField = (function (_super) {
     }
     TextField.prototype.render = function (context) {
         context.font = "20px Arial";
-        context.fillStyle = '#000000';
+        context.fillStyle = '#FFFFFF';
         context.fillText('HelloWorld', 0, 20);
     };
     return TextField;
@@ -96,16 +96,18 @@ function loadResource(imageList, callback) {
 var canvas = document.getElementById("game");
 var context = canvas.getContext("2d");
 var rect = new Rect();
-rect.width = 200;
-rect.height = 100;
-rect.color = '#00FF00';
+rect.width = 1024;
+rect.height = 576;
+rect.color = '#4282fe';
 var rect2 = new Rect();
-rect2.width = 300;
-rect2.height = 50;
-rect2.x = 200;
-rect2.y = 200;
-rect2.rotation = Math.PI / 8;
-rect2.color = '#00FFFF';
+rect2.width = 20;
+rect2.height = 576;
+rect2.color = '#000000';
+var rect3 = new Rect();
+rect3.width = 20;
+rect3.height = 576;
+rect3.x = 1004;
+rect3.color = '#000000';
 var text = new TextField();
 text.x = 10;
 var bitmap1 = new Bitmap();
@@ -125,7 +127,7 @@ bitmap4.source = 'title_icon.png';
 bitmap4.x = 130;
 bitmap4.y = 26;
 //渲染队列
-var renderQueue = [rect, rect2, text, bitmap1, bitmap2, bitmap3, bitmap4];
+var renderQueue = [rect, rect2, rect3, text, bitmap1, bitmap2, bitmap3, bitmap4];
 //资源加载列表
 var imageList = ['play_icon.png', 'options_icon.png', 'get_songs.png', 'title_icon.png'];
 //先加载资源，加载成功之后执行渲染队列
