@@ -59,11 +59,14 @@ var TextField = (function (_super) {
     __extends(TextField, _super);
     function TextField() {
         _super.apply(this, arguments);
+        this.font = "24px Arial";
+        this.color = '#FFFFFF';
+        this.filltext = 'OSU';
     }
     TextField.prototype.render = function (context) {
-        context.font = "20px Arial";
-        context.fillStyle = '#FFFFFF';
-        context.fillText('HelloWorld', 0, 20);
+        context.font = this.font;
+        context.fillStyle = this.color;
+        context.fillText(this.filltext, 0, 20);
     };
     return TextField;
 }(DisplayObject));
@@ -109,7 +112,26 @@ rect3.height = 576;
 rect3.x = 1004;
 rect3.color = '#000000';
 var text = new TextField();
-text.x = 10;
+text.x = 31;
+text.y = 483;
+text.filltext = 'osu!droid';
+var text2 = new TextField();
+text2.x = 31;
+text2.y = 513;
+text2.filltext = 'coded by Pesets';
+var text3 = new TextField();
+text3.x = 31;
+text3.y = 543;
+text3.filltext = 'osu! is @ peppy 2007-2012';
+var text4 = new TextField();
+text4.x = 680;
+text4.y = 515;
+text4.filltext = 'DDL by YaS-Online.net';
+var text5 = new TextField();
+text5.x = 665;
+text5.y = 545;
+text5.font = "28px Arial";
+text5.filltext = 'click here to visit this site';
 var bitmap1 = new Bitmap();
 bitmap1.source = 'play_icon.png';
 bitmap1.x = 575;
@@ -127,7 +149,7 @@ bitmap4.source = 'title_icon.png';
 bitmap4.x = 130;
 bitmap4.y = 26;
 //渲染队列
-var renderQueue = [rect, rect2, rect3, text, bitmap1, bitmap2, bitmap3, bitmap4];
+var renderQueue = [rect, rect2, rect3, text, text2, text3, text4, text5, bitmap1, bitmap2, bitmap3, bitmap4];
 //资源加载列表
 var imageList = ['play_icon.png', 'options_icon.png', 'get_songs.png', 'title_icon.png'];
 //先加载资源，加载成功之后执行渲染队列
