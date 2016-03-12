@@ -120,13 +120,30 @@ rect2.color = '#00FFFF'
 var text = new TextField();
 text.x = 10;
 
-var bitmap = new Bitmap();
-bitmap.source = 'play_icon.png';
+var bitmap1 = new Bitmap();
+bitmap1.source = 'play_icon.png';
+bitmap1.x = 575;
+bitmap1.y = 114;
+
+var bitmap2 = new Bitmap();
+bitmap2.source = 'options_icon.png';
+bitmap2.x = 639;
+bitmap2.y = 239;
+
+var bitmap3 = new Bitmap();
+bitmap3.source = 'get_songs.png';
+bitmap3.x = 578;
+bitmap3.y = 365;
+
+var bitmap4= new Bitmap();
+bitmap4.source = 'title_icon.png';
+bitmap4.x = 130;
+bitmap4.y = 26;
 
 //渲染队列
-var renderQueue = [rect, rect2, text,bitmap];
+var renderQueue = [rect, rect2, text, bitmap1, bitmap2, bitmap3, bitmap4];
 //资源加载列表
-var imageList = ['play_icon.png'];
+var imageList = ['play_icon.png','options_icon.png','get_songs.png','title_icon.png'];
 
 //先加载资源，加载成功之后执行渲染队列
 loadResource(imageList, function() {
