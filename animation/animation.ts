@@ -58,21 +58,26 @@ class Body {
     }
 
     public onTicker(duringTime) {
-
+      
         this.vy += duringTime * GRAVITY;
         this.x += duringTime * this.vx;
         this.y += duringTime * this.vy;
 
         //反弹
-        if (this.y + this.height > BOUNDS_BOTTOM) {
+        if (this.y + this.height > BOUNDS_BOTTOM && this.vy >0) {
+            this.vy = -BOUNCE * this.vy;
+        }
+        if(this.y < 0){
             this.vy = -BOUNCE * this.vy;
         }
 
-        //TODO： 左右越界反弹
+        //左右越界反弹
         if (this.x + this.width > BOUNDS_RIGHT) {
             this.vx = -BOUNCE * this.vx;
         }
-
+        if (this.x < BOUNDS_LEFT) {
+            this.vx = -BOUNCE * this.vx;
+        }
 
 
         //根据物体位置更新显示对象属性
@@ -95,8 +100,8 @@ rect.color = '#FF0000';
 var body = new Body(rect);
 body.width = rect.width;
 body.height = rect.height;
-body.vx = 5;//需要保证 vx 在 0-50的范围内行为正常
-body.vy = 0;//需要保证 vy 在 0-50的范围内行为正常
+body.vx = 10;//需要保证 vx 在 0-50的范围内行为正常
+body.vy = 1;//需要保证 vy 在 0-50的范围内行为正常
 
 
 var renderCore = new RenderCore();
