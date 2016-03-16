@@ -7,6 +7,7 @@ var BOUNDS_LEFT = 0;
 var BOUNDS_RIGHT = 400;
 var BOUNCE = 0.95;
 var MIN = 0.5;
+var f = 0.1;
 /**
  * 计时器系统
  */
@@ -50,6 +51,12 @@ var Body = (function () {
             this.vy += duringTime * GRAVITY;
             this.x += duringTime * this.vx;
             this.y += duringTime * this.vy;
+        }
+        else {
+            this.vy = 0;
+            this.vx -= this.vx * f;
+            this.x += duringTime * this.vx;
+            this.y = BOUNDS_BOTTOM - this.height;
         }
         //反弹
         if (this.y + this.height > BOUNDS_BOTTOM && this.vy > 0) {

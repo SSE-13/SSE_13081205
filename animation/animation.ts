@@ -13,6 +13,8 @@ const BOUNCE = 0.95;
 
 const MIN = 0.5;
 
+const f = 0.1;
+
 /**
  * 计时器系统
  */
@@ -66,7 +68,12 @@ class Body {
         this.vy += duringTime * GRAVITY;
         this.x += duringTime * this.vx;
         this.y += duringTime * this.vy;
-      }
+      }else {
+          this.vy = 0;
+          this.vx -= this.vx * f;
+          this.x += duringTime * this.vx;
+          this.y = BOUNDS_BOTTOM - this.height;
+        }
 
         //反弹
         if (this.y + this.height > BOUNDS_BOTTOM && this.vy >0) {
