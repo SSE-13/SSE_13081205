@@ -11,6 +11,8 @@ const BOUNDS_RIGHT = 400;
 
 const BOUNCE = 0.95;
 
+const MIN = 0.5;
+
 /**
  * 计时器系统
  */
@@ -50,6 +52,7 @@ class Body {
     y = 0;
     width = 0;
     height = 0;
+    landed = false;
 
     displayObject;
 
@@ -59,13 +62,17 @@ class Body {
 
     public onTicker(duringTime) {
       
+      if(!this.landed){
         this.vy += duringTime * GRAVITY;
         this.x += duringTime * this.vx;
         this.y += duringTime * this.vy;
+      }
 
         //反弹
         if (this.y + this.height > BOUNDS_BOTTOM && this.vy >0) {
             this.vy = -BOUNCE * this.vy;
+             if (Math.abs(this.vy) <= MIN && this.vy + GRAVITY * duringTime > 0)
+                this.landed = true;
         }
         if(this.y < 0){
             this.vy = -BOUNCE * this.vy;
