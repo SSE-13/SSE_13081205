@@ -5,8 +5,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var game;
 (function (game) {
-    var WIDTH = 50;
-    var HEIGHT = 50;
+    var GRID_PIXEL_WIDTH = 50;
+    var GRID_PIXEL_HEIGHT = 50;
     var NUM_ROWS = 12;
     var NUM_COLS = 12;
     var WorldMap = (function (_super) {
@@ -23,12 +23,20 @@ var game;
             grid.setWalkable(5, 5, false);
         }
         WorldMap.prototype.render = function (context) {
-            context.fillStyle = '#0000FF';
+            //context.fillStyle = '#0000FF';
             context.strokeStyle = '#FF0000';
             context.beginPath();
             for (var i = 0; i < NUM_COLS; i++) {
                 for (var j = 0; j < NUM_ROWS; j++) {
-                    context.rect(i * WIDTH, j * HEIGHT, WIDTH, HEIGHT);
+                    if (!this.grid.getNode(i, j).walkable) {
+                        context.fillRect(i * GRID_PIXEL_WIDTH, (j - 1) * GRID_PIXEL_HEIGHT, GRID_PIXEL_WIDTH, GRID_PIXEL_HEIGHT);
+                        context.fillRect(i * GRID_PIXEL_WIDTH, j * GRID_PIXEL_HEIGHT, GRID_PIXEL_WIDTH, GRID_PIXEL_HEIGHT);
+                        context.fillStyle = '#000000';
+                    }
+                    else {
+                        context.rect(i * GRID_PIXEL_WIDTH, j * GRID_PIXEL_HEIGHT, GRID_PIXEL_WIDTH, GRID_PIXEL_HEIGHT);
+                        context.fillStyle = '#0000FF';
+                    }
                     context.fill();
                     context.stroke();
                 }
@@ -46,7 +54,7 @@ var game;
         BoyShape.prototype.render = function (context) {
             context.beginPath();
             context.fillStyle = '#00FFFF';
-            context.arc(WIDTH / 2, HEIGHT / 2, Math.min(WIDTH, HEIGHT) / 2 - 5, 0, Math.PI * 2);
+            context.arc(GRID_PIXEL_WIDTH / 2, GRID_PIXEL_HEIGHT / 2, Math.min(GRID_PIXEL_WIDTH, GRID_PIXEL_HEIGHT) / 2 - 5, 0, Math.PI * 2);
             context.fill();
             context.closePath();
         };
@@ -78,6 +86,8 @@ var boyShape = new game.BoyShape();
 var world = new game.WorldMap();
 var body = new game.BoyBody(boyShape);
 body.run(world.grid);
+body.vx = 10;
+body.vy = 20;
 var renderCore = new RenderCore();
 renderCore.start([world, boyShape]);
 var ticker = new Ticker();
