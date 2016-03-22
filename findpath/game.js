@@ -65,18 +65,34 @@ var game;
         __extends(BoyBody, _super);
         function BoyBody() {
             _super.apply(this, arguments);
+            this._Position = new Array(2);
+            this._Step = 1;
         }
         BoyBody.prototype.run = function (grid) {
+            for (var i = 0; i < 2; i++) {
+                this._Position[i] = new Array;
+            }
             grid.setStartNode(0, 0);
             grid.setEndNode(10, 8);
-            var findpath = new astar.AStar();
-            findpath.setHeurisitic(findpath.diagonal);
-            var result = findpath.findPath(grid);
-            var path = findpath._path;
+            this.Path = new astar.AStar();
+            this.Path.setHeurisitic(this.Path.diagonal);
+            var result = this.Path.findPath(grid);
+            var path = this.Path._path;
+            for (var i = 1; i < this.Path._path.length; i++) {
+                this._Position[0][i] = this.Path._path[i].x - this.Path._path[i - 1].x;
+                this._Position[1][i] = this.Path._path[i].y - this.Path._path[i - 1].y;
+            }
             console.log(path);
             console.log(grid.toString());
         };
         BoyBody.prototype.onTicker = function (duringTime) {
+            if (this.x < NUM_ROWS * GRID_PIXEL_WIDTH && this.y < NUM_COLS * GRID_PIXEL_HEIGHT) {
+                if (this._Step <= this.Path._path.length) {
+                    this.x += this._Position[0][this._Step] * GRID_PIXEL_WIDTH;
+                    this.y += this._Position[1][this._Step] * GRID_PIXEL_HEIGHT;
+                    this._Step++;
+                }
+            }
         };
         return BoyBody;
     }(Body));
@@ -86,8 +102,8 @@ var boyShape = new game.BoyShape();
 var world = new game.WorldMap();
 var body = new game.BoyBody(boyShape);
 body.run(world.grid);
-body.vx = 10;
-body.vy = 20;
+body.vx = 15;
+body.vy = 15;
 var renderCore = new RenderCore();
 renderCore.start([world, boyShape]);
 var ticker = new Ticker();
