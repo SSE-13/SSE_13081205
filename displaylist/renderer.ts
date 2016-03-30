@@ -62,6 +62,11 @@ module render {
 
         }
     }
+    
+    function matrixoperation(M1: Matrix , M2: Matrix) {
+        
+        
+    }
 
     export class DisplayObjectContainer extends DisplayObject {
 
