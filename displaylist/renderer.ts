@@ -65,6 +65,14 @@ module render {
     
     function matrixoperation(M1: Matrix , M2: Matrix) {
         
+        var m = new Matrix();
+        m.a = M1.a * M2.a + M1.b * M2.c;
+        m.b = M1.a * M2.b + M1.b * M2.d;
+        m.c = M2.a * M1.c + M2.c * M1.d;
+        m.d = M2.b * M1.c + M1.d * M2.d;
+        m.tx = M2.a * M1.tx + M2.c * M1.ty + M2.tx;
+        m.ty = M2.b * M1.tx + M2.d * M1.ty + M2.ty;
+        return m;
         
     }
 
