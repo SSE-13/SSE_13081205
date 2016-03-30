@@ -4,6 +4,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var human = new render.DisplayObjectContainer();
+human.x = -50;
+human.y = -100;
 var humanContainer = new render.DisplayObjectContainer();
 humanContainer.addChild(human);
 var head = new render.Bitmap();
@@ -33,12 +35,14 @@ var HumanBody = (function (_super) {
     }
     HumanBody.prototype.onTicker = function (duringTime) {
         this.x += this.vx * duringTime;
-        //this.y = 
-        //this.rotation =
+        this.y += this.vy * duringTime * 2;
+        this.rotation += Math.PI * duringTime;
     };
     return HumanBody;
 }(Body));
 var ticker = new Ticker();
 var body = new HumanBody(humanContainer);
+body.vx = 5;
+body.y = 100;
 ticker.start([body]);
 //# sourceMappingURL=game.js.map

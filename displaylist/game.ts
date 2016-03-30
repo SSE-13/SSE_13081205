@@ -4,6 +4,8 @@ module game {
 }
 
 var human = new render.DisplayObjectContainer();
+human.x = -50;
+human.y = -100;
 var humanContainer = new render.DisplayObjectContainer();
 humanContainer.addChild(human);
 
@@ -41,14 +43,16 @@ class HumanBody extends Body {
     onTicker(duringTime: number) {
 
         this.x += this.vx * duringTime; 
-        //this.y = 
-        //this.rotation =
+        this.y += this.vy * duringTime * 2;
+        this.rotation += Math.PI*duringTime;
 
     }
 }
 
 var ticker = new Ticker();
 var body = new HumanBody(humanContainer);
+body.vx = 5;
+body.y = 100; 
 ticker.start([body]);
 
 
