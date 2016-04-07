@@ -38,7 +38,7 @@ class HumanBody extends Body {
     
     
     vx:number = 5;
-    vr = Math.PI/2;
+    vr = Math.PI/3;
 
     onTicker(duringTime: number) {
         this.x += this.vx * duringTime;
@@ -59,6 +59,8 @@ eventCore.init();
 
 var isHead = 0;
 var ClickedHead = false;
+var isLeg = 0;
+var ClickedLeg = false;
 
 var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
     //alert (`点击位置为${localPoint.x},${localPoint.y}`);
@@ -95,14 +97,35 @@ var headOnClick = () => {
    alert("clickhead:"+isHead);
 }
 
+var LegHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
+    // alert (`点击位置为${localPoint.x},${localPoint.y}`);
+
+    if(localPoint.x > 0 && localPoint.x <=  Math.abs(displayObject.x * 2) && localPoint.y > 0 && localPoint.y < Math.abs(displayObject.y * 2)){
+        isLeg += 1;
+        ClickedLeg = true;
+    }
+
+    return ClickedLeg;
+  
+}
+var LegOnClick = () => {
+    
+    if(isLeg == 1){
+
+        body.vx = 0;
+        body.vr = 0;
+        body.rotation = 0;
+    }
+    if(isLeg >= 1){
+        
+        isLeg = 0;
+    }
+    ClickedLeg = false;    
+
+}
+
 eventCore.register(head,headHitTest,headOnClick);
-
-
-
-
-
-
-
-
+eventCore.register(left_leg,LegHitTest,LegOnClick);
+eventCore.register(right_leg,LegHitTest,LegOnClick);
 
 
