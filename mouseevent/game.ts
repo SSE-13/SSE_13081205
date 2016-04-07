@@ -38,11 +38,10 @@ class HumanBody extends Body {
     
     
     vx:number = 5;
-    
+    vr = Math.PI/2;
 
     onTicker(duringTime: number) {
         this.x += this.vx * duringTime;
-        this.y = 100;
         this.rotation += Math.PI*duringTime;
 
     }
@@ -58,14 +57,42 @@ ticker.start([body]);
 var eventCore = new events.EventCore();
 eventCore.init();
 
+var isHead = 0;
+var ClickedHead = false;
+
 var headHitTest = (localPoint:math.Point,displayObject:render.DisplayObject) =>{
-    alert (`点击位置为${localPoint.x},${localPoint.y}`);
-    return true;
+    //alert (`点击位置为${localPoint.x},${localPoint.y}`);
+
+    if(localPoint.x <= Math.abs(displayObject.x * 6) && localPoint.y <= Math.abs(displayObject.y)&&
+    localPoint.x > 0 && localPoint.y > 0){
+        isHead += 1;
+        ClickedHead = true;
+        
+    }
+    return ClickedHead;
 }
 
 var headOnClick = () => {
-    alert("clicked!!");
+    //alert("clicked!!");
     //修改 HumanBody 的速度，使其反向移动
+     if(isHead == 1){
+        if(body.vx!=0){
+            body.vx *= -1;
+            body.vr *= -1;
+        }
+        if(body.vx == 0){
+            isHead = 0;
+        }
+        
+    }
+
+    if(isHead != 1){
+        body.vx = 5;
+        body.vr = Math.PI/2;
+        isHead = 0;
+    }
+    ClickedHead = false;
+   alert("clickhead:"+isHead);
 }
 
 eventCore.register(head,headHitTest,headOnClick);

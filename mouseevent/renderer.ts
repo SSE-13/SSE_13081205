@@ -5,9 +5,6 @@ var context = canvas.getContext("2d");
 module render {
 
 
-
-
-
     /**
      * 基类，负责处理x,y,rotation 等属性
      */
