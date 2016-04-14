@@ -108,3 +108,4 @@ var renderCore = new RenderCore();
 renderCore.start([world, boyShape]);
 var ticker = new Ticker();
 ticker.start([body]);
+
