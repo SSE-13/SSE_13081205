@@ -10,6 +10,14 @@ function readFile() {
     return mapData;
 }
 
+function writeFile() {
+    console.log(mapData);
+    var map_path = __dirname + "/map.json"
+    var json = "{\"map\":" + JSON.stringify(mapData) + "}";
+    console.log(json);
+    fs.writeFileSync(map_path, json, "utf-8");
+    console.log("saved");
+}
 
 function createMapEditor() {
     var world = new editor.WorldMap();
@@ -63,8 +71,10 @@ eventCore.init();
 
 var mainContainer = new render.DisplayObjectContainer();
 
-var editor = createMapEditor();
 
+
+
+var editor = createMapEditor();
 
 mainContainer.addChild(editor);
 
