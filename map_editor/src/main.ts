@@ -1,4 +1,3 @@
-
 import * as fs from 'fs';
 
 
@@ -38,11 +37,22 @@ function createMapEditor() {
 }
 
 
-
-function onTileClick(tile: editor.Tile) {
-    console.log(tile);
+var SaveHitTest = (localPoint: math.Point, displayObject: render.DisplayObject) => {
+    if (localPoint.x >= 0 && localPoint.x <= 100 && localPoint.y >= 0 && localPoint.y <= 50)
+        return true;
 }
 
+function onTileClick(tile: editor.Tile) {
+    console.log(tile.ownedRow + " " + tile.ownedCol + " " + mapData[tile.ownedRow][tile.ownedCol]);
+    mapData[tile.ownedRow][tile.ownedCol] = mapData[tile.ownedRow][tile.ownedCol] ? 0 : 1;
+    tile.setWalkable(mapData[tile.ownedRow][tile.ownedCol]);
+    console.log(tile.ownedRow + " " + tile.ownedCol + " " + mapData[tile.ownedRow][tile.ownedCol]);  
+}
+
+function onSaveClick() {
+    console.log("saving");
+    writeFile();
+}
 
 var mapData = readFile();
 
@@ -51,6 +61,12 @@ var renderCore = new render.RenderCore();
 var eventCore = new events.EventCore();
 eventCore.init();
 
+var mainContainer = new render.DisplayObjectContainer();
 
 var editor = createMapEditor();
-renderCore.start(editor);
+
+
+mainContainer.addChild(editor);
+
+
+renderCore.start(mainContainer);

@@ -132,7 +132,7 @@ module render {
 
     export class TextField extends DisplayObject {
 
-        text;
+        text = "HelloWorld";
 
         render(context: CanvasRenderingContext2D) {
             context.font = "20px Arial";
