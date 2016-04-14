@@ -71,12 +71,25 @@ eventCore.init();
 
 var mainContainer = new render.DisplayObjectContainer();
 
+var button = new render.Rect();
+mainContainer.addChild(button);
+button.x = 0;
+button.y = 200;
+button.width = 80;
+button.height = 40;
 
+var textButton = new render.TextField();
+mainContainer.addChild(textButton);
+textButton.text = "save";
+textButton.x = 10;
+textButton.y = 210;
 
 
 var editor = createMapEditor();
 
+mainContainer.addChild(textButton);
 mainContainer.addChild(editor);
 
 
 renderCore.start(mainContainer);
+eventCore.register(textButton, SaveHitTest, onSaveClick);
